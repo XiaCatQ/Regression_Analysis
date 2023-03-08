@@ -7,7 +7,11 @@ and then describe your planned analysis.
 
 - [ ]  A statistically descriptive analysis of the dataset.
 - [ ]  applications of statistical analysis techniques learned in previous coursework.
-- [ ]  what scientific questions you will try to answer,.
+- [ ]  what scientific questions you will try to answer:
+        • How those living habit and health condition related variables may affect the possibility of being diagnosed with heart disease in general.
+        •  How each variable contribute to the inference of heart disease, identify mostly related variables.
+        • How is the correlation among those variables.
+        • How to identify vulnerable groups of getting heart disease.
 - [ ]  the statistical analysis techniques you will use to answer those questions (with justification),
 - [ ] (optionally) any preliminary results you would like rev
 
