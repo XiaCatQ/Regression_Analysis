@@ -13,7 +13,7 @@ and then describe your planned analysis.
         • How is the correlation among those variables.  
         • How to identify vulnerable groups of getting heart disease.  
 - [ ]  the statistical analysis techniques you will use to answer those questions (with justification),
-- [ ] (optionally) any preliminary results you would like rev
+- [ ] (optionally) any preliminary results you would like reviewd.
 
 ## 2. Format
 - **Length**: 10 pages max, including figures and tables.
