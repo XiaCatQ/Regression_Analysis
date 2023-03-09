@@ -1,0 +1,105 @@
+---
+title: "EDA"
+author: "Matthew Yau, ZiYing(Sophie) Chen, Xinyu Dong"
+date: "2023-03-09"
+output:
+  pdf_document:
+    latex_engine: xelatex
+fontsize: 11pt
+fig_height: 6
+fig_width: 6
+df_print: kable
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r, resultS = FALSE, include=FALSE}
+library(tidyverse)
+library(psych)
+library(inspectdf)
+library(dplyr)
+library(kableExtra)
+library(knitr)
+library(ggplot2)
+```
+
+## Statistical Description
+There are 14 categorical and 4 numerical variables in the dataset, and our target variable is “HeartDisease”. This is a clean dataset without any missing data. Among the 319,795 observations, we removed 18,078 duplicates. Therefore, the following explanatory data analysis would only perform on 301,717 observations. 
+
+## Univariate Analysis
+- Numerical Data:  
+
+From Table1 we can see that the means and medians of *BMI* and *SleepTime* are close, which suggests that there are no obvious skewness of the data. On the other hand, means of both *PhysicalHealth* and *MentalHealth* are bigger than their medians, which means that they skew to the right. That makes sense because most people in a survey would rather not claiming they have health issues. 
+
+We can use the range and the standard deviation to see the spread of the data, but using histograms would be a better option. From Figure 1-1 to Figure 1-4, we can see that most people scored their physical and mental health to be 0 which means most people did not feel bad in past month. Contrastly, some of them claimed they had physical and mental health problem every day in past month.The spreads of *PhysicalHealth* and *MentalHealth* are similar according to the charts and that makes sense because the range of scores are the same and these two variables might relate to each other.
+
+
+```{r}
+data <- read.csv("data/heart_2020_cleaned.csv")
+# head(data)
+
+data <- data[!duplicated(data), ]
+# str(data)
+num_cols <- unlist(lapply(data, is.numeric))
+df_num <- data[, num_cols]
+table1 <- describe(df_num) 
+table1 <-kable(table1, booktabs = TRUE, caption = "Statistics for Numerical Variables") %>%
+  kable_styling(latex_options="scale_down")
+table1
+```
+
+```{r}
+par(mfrow=c(2,2))
+hist(df_num$BMI, xlab = NULL, main = "Figure 1-1: BMI")
+hist(df_num$PhysicalHealth, xlab = NULL, main = "Figure 1-2: Physical Health")
+hist(df_num$MentalHealth, xlab = NULL, main = "Figure 1-3: Mental Health")
+hist(df_num$SleepTime, xlab = NULL, main = "Figure 1-4: Sleep Time")
+```
+
+From Figure 2-1 to 2-4, we detected many outliers existing in all the variables, but we would not remove them for now because maybe these outliers have higher chance to get heart disease.
+
+```{r}
+par(mfrow=c(2,2))
+boxplot(df_num$BMI, xlab = NULL, main = "Figure 2-1: BMI")
+boxplot(df_num$PhysicalHealth, xlab = NULL, main = "Figure 2-2: Physical Health")
+boxplot(df_num$MentalHealth, xlab = NULL, main = "Figure 2-3: Mental Health")
+boxplot(df_num$SleepTime, xlab = NULL, main = "Figure 2-4: Sleep Time")
+```
+
+- Categorical Data:  
+
+From Figure 3, We can that our target variable *HeartDisease* is unbalanced which most of the cases do not have heart disease. The *AgeCategory* and *Sex* looks balanced here, we would like to see if there is any significant difference of the probabilities of getting heart disease among age groups and sex later. "White" category dominates the *Race*, we would proceed the analysis by convert it to binary data with "non-white" as the other. *GenHealth* indicates that most people feeling good which match the majority of the observations do not have heart disease. The rest of the variables are binary and all of them incline to one side.
+
+```{r}
+df <- data %>% inspect_cat()  # frequency of categorical data
+df %>% show_plot() 
+```
+
+## Bivariate Analysis
+
+```{r}
+ggplot(data = data, mapping = aes(x = AgeCategory, y = BMI)) +
+  geom_boxplot()
+```
+The boxplot of *SleepTime* reveals an uncommon phenomona that people who are 80 or older sleeps more.
+```{r}
+ggplot(data = data, mapping = aes(x = AgeCategory, y = SleepTime)) +
+  geom_boxplot()
+```
+The boxplots indicates that younger generation suffer more from mental issues and older generation suffer more on physical problems.
+
+```{r}
+par(mfrow=c(2,1))
+ggplot(data = data, mapping = aes(x = AgeCategory, y = PhysicalHealth)) +
+  geom_boxplot()
+ggplot(data = data, mapping = aes(x = AgeCategory, y = MentalHealth)) +
+  geom_boxplot()
+```
+
+
+- Numerical and Categorical
+
+
+
