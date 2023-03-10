@@ -140,13 +140,12 @@ ggplot(data = data, mapping = aes(x = AgeCategory, y = PhysicalHealth)) +
 ggplot(data = data, mapping = aes(x = AgeCategory, y = MentalHealth)) +
   geom_boxplot()
 ```
-## Multivariate Analysis
 
 - Logistic Model
 
 By fitting logistic regression, we can see that almost all the variables are significant for predicting *HeartDisease*. Surprisingly, *AlchoholDrinking* has negative association with *HeartDisease*.
 
-Combine the result from the model and the Figure 4, we might consider to regroup the data into only 4 groups (< 40, 40-59, 60-79, >80). Also, to find the vulnerable groups of getting heart disease, we may use decision tree and the PCA.
+Combine the result from the model and the Figure 4, we might consider to regroup the *AgeGroup* into only 4 groups (< 40, 40-59, 60-79, >80). Also, to find the vulnerable groups of getting heart disease, we may use decision tree and the PCA.
 ```{r}
 logit_model <- glm(as.factor(HeartDisease)~., data = data, family = binomial)
 summary(logit_model)
