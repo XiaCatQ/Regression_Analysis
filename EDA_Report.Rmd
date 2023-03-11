@@ -1,5 +1,5 @@
 ---
-title: "EDA"
+title: "Explanatory Data Analysis"
 author: "Matthew Yau, ZiYing(Sophie) Chen, Xinyu Dong"
 date: "2023-03-09"
 output:
@@ -127,19 +127,29 @@ table2
 # res
 ```
 
-We then further analyze them in different age groups because we would love to reduce the number of age groups. *BMI* goes higher as people get older and then after 65 it gets lower. *SleepTime* reveals an uncommon phenomona that people who are 80 or older sleeps more. Figure 4 also indicates that younger generation suffer more from mental issues and older generation suffer more on physical problems.
+We then further analyze them in different age groups because we would love to reduce the number of age groups. Here is the summary for Figure 4. *BMI* goes higher as people get older and then after 65 it gets lower. *SleepTime* reveals an uncommon phenomona that people who are 80 or older sleeps more. Also, it indicates that younger generation suffer more from mental issues and older generation suffer more on physical problems.
 
-```{r, fig.height = 4, fig.cap= "Numerical Variables among Different  Age Groups"}
-par(mfrow=c(2,2))
+
+```{r, fig.height = 4}
 ggplot(data = data, mapping = aes(x = AgeCategory, y = BMI)) +
   geom_boxplot()
-ggplot(data = data, mapping = aes(x = AgeCategory, y = SleepTime)) + 
+```
+```{r, fig.height = 4}
+ggplot(data = data, mapping = aes(x = AgeCategory, y = SleepTime)) +
   geom_boxplot()
+```
+
+```{r, fig.height = 4}
 ggplot(data = data, mapping = aes(x = AgeCategory, y = PhysicalHealth)) +
   geom_boxplot()
+```
+
+```{r, fig.height = 4, fig.cap= "Numerical Variables among Different  Age Groups"}
 ggplot(data = data, mapping = aes(x = AgeCategory, y = MentalHealth)) +
   geom_boxplot()
 ```
+
+
 
 - Logistic Model
 
