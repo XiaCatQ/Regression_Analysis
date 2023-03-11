@@ -151,3 +151,40 @@ logit_model <- glm(as.factor(HeartDisease)~., data = data, family = binomial)
 summary(logit_model)
 ```
 
+## What scientific questions you will try to answer:
+
+- How those living habits and health condition-related variables may affect the possibility of being diagnosed with heart disease in general.
+
+- How each variable contributes to the inference of heart disease, identify mostly related variables.
+
+- What is the correlation among those variables?
+
+- How to identify vulnerable groups getting heart disease.
+
+
+
+## The statistical analysis techniques you will use to answer those questions (with justification)
+
+The scientific questions above are more focused on statistical inference rather than performing predictions. To understand the relationship between those emphasized variables, we will both perform classification and regression on this dataset. 
+
+#### Classification:
+
+The classification is aimed at answering the vulnerable groups and how the variable will contribute to the diagnosis. The statistical method we choose is `Decision Tree Classification`, reasons are:
+
+- **Model interpretation:** Though the decision tree may not provide the most accurate prediction, the boundary it gives is interpretable and fits well with our purpose of studying the contribution to heart disease. 
+- **Built-in variable selection:** The decision tree itself can help us with variable selection, which is important cause we want to know the most related  variables 
+- **Capable of dealing with mixed variable type**: Our data set is a combination of numerical and categorical data, and `Decision Trees` handle those well. 
+- **A non-parametric aspect**: It will provide a non-parametric way aside from our regression method to be compared.
+- **Perform well on imbalanced dataset**: The proportion of the heart disease in our data set is not balanced, but `Decision tree`'s hierarchical structure allows it to learn signals from both classes. 
+
+
+
+#### Regression:
+
+Here will study our data with `Logistic Regression`, which is a pretty intuitive way. 
+
+- **Intuitive Regression Method**: Logistic regression is a widely accepted method in terms of building linear relationships between binary response and other predictors, with a range of well-developed statistical testing and evaluation techniques. 
+
+- **Marginal Interpretation**: The advantage of using a linear combination of the coefficients is interpretable and we could compare their coefficients to understand how each variable is counting for the heart disease diagnosis.
+- **Probabilistic interpretation**: Rather than just give a classification result, the response is actually probabilistic, which will enhance our statistical argumentation. 
+- **Correlation Calibration**: By examining potential correlations and multilinearity among those variables, we could perform multiple trials on regression with different interaction terms. 
