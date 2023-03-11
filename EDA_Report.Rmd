@@ -181,7 +181,7 @@ The classification is aimed at answering the vulnerable groups and how the varia
 
 #### Regression:
 
-Here will study our data with `Logistic Regression`, which is a pretty intuitive way. 
+Here we will study our data with `Logistic Regression`, which is a pretty intuitive way. 
 
 - **Intuitive Regression Method**: Logistic regression is a widely accepted method in terms of building linear relationships between binary response and other predictors, with a range of well-developed statistical testing and evaluation techniques. 
 
