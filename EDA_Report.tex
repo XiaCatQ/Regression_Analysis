@@ -1,0 +1,434 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  11pt,
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={EDA},
+  pdfauthor={Matthew Yau, ZiYing(Sophie) Chen, Xinyu Dong},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{EDA}
+\author{Matthew Yau, ZiYing(Sophie) Chen, Xinyu Dong}
+\date{2023-03-09}
+
+\begin{document}
+\maketitle
+
+\hypertarget{statistical-description}{%
+\subsection{Statistical Description}\label{statistical-description}}
+
+There are 14 categorical and 4 numerical variables in the dataset, and
+our target variable is ``HeartDisease''. This is a clean dataset without
+any missing data. Among the 319,795 observations, we removed 18,078
+duplicates. Therefore, the following explanatory data analysis would
+only perform on 301,717 observations.
+
+\hypertarget{univariate-analysis}{%
+\subsection{Univariate Analysis}\label{univariate-analysis}}
+
+\begin{itemize}
+\tightlist
+\item
+  Numerical Data:
+\end{itemize}
+
+From Table1 we can see that the means and medians of \emph{BMI} and
+\emph{SleepTime} are close, which suggests that there are no obvious
+skewness of the data. On the other hand, means of both
+\emph{PhysicalHealth} and \emph{MentalHealth} are bigger than their
+medians, which means that they skew to the right. That makes sense
+because most people in a survey would rather not claiming they have
+health issues.
+
+We can use the range and the standard deviation to see the spread of the
+data, but using histograms would be a better option. From Figure 1, we
+can see that most people scored their physical and mental health to be 0
+which means most people did not feel bad in past month. Contrastly, some
+of them claimed they had physical and mental health problem every day in
+past month.The spreads of \emph{PhysicalHealth} and \emph{MentalHealth}
+are similar according to the charts and that makes sense because the
+range of scores are the same and these two variables might relate to
+each other.
+
+\begin{table}
+
+\caption{\label{tab:unnamed-chunk-2}Statistics for Numerical Variables}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}[t]{lrrrrrrrrrrrrr}
+\toprule
+  & vars & n & mean & sd & median & trimmed & mad & min & max & range & skew & kurtosis & se\\
+\midrule
+BMI & 1 & 301717 & 28.441970 & 6.468134 & 27.41 & 27.822767 & 5.574576 & 12.02 & 94.85 & 82.83 & 1.2977241 & 3.690549 & 0.0117755\\
+PhysicalHealth & 2 & 301717 & 3.572298 & 8.140657 & 0.00 & 1.192249 & 0.000000 & 0.00 & 30.00 & 30.00 & 2.5009749 & 4.971089 & 0.0148204\\
+MentalHealth & 3 & 301717 & 4.121475 & 8.128288 & 0.00 & 1.929218 & 0.000000 & 0.00 & 30.00 & 30.00 & 2.2374477 & 3.938407 & 0.0147979\\
+SleepTime & 4 & 301717 & 7.084559 & 1.467122 & 7.00 & 7.093788 & 1.482600 & 1.00 & 24.00 & 23.00 & 0.6972167 & 7.571991 & 0.0026710\\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\begin{figure}
+\centering
+\includegraphics{EDA_Report_files/figure-latex/unnamed-chunk-3-1.pdf}
+\caption{Histogram of Numerical Variables}
+\end{figure}
+
+From Figure 2, we detected many outliers existing in all the variables,
+but we would not remove them for now because maybe these outliers have
+higher chance to get heart disease.
+
+\begin{figure}
+\centering
+\includegraphics{EDA_Report_files/figure-latex/unnamed-chunk-4-1.pdf}
+\caption{Boxplot of Numerical Variables}
+\end{figure}
+
+\begin{itemize}
+\tightlist
+\item
+  Categorical Data:
+\end{itemize}
+
+From Figure 3, We can that our target variable \emph{HeartDisease} is
+unbalanced which most of the cases do not have heart disease. The
+\emph{AgeCategory} and \emph{Sex} looks balanced here, we perform
+\(\chi^2\) test to see if there is any significant difference of the
+probabilities of getting heart disease among age groups and sex later.
+``White'' category dominates the \emph{Race}, we would proceed the
+analysis by convert it to binary data with ``non-white'' as the other.
+\emph{GenHealth} indicates that most people feeling good which match the
+majority of the observations do not have heart disease. The rest of the
+variables are binary and all of them incline to one side.
+
+\begin{figure}
+\centering
+\includegraphics{EDA_Report_files/figure-latex/unnamed-chunk-5-1.pdf}
+\caption{Frequency of Categorical Variables}
+\end{figure}
+
+\hypertarget{bivariate-analysis}{%
+\subsection{Bivariate Analysis}\label{bivariate-analysis}}
+
+\begin{itemize}
+\tightlist
+\item
+  Categorical Data
+\end{itemize}
+
+We perform \(\chi^2\) test for correlation between \emph{HeartDisease}
+and \emph{AgeGroup} and \emph{Sex} and \emph{Race}:
+
+Ho: \emph{HeartDisease} is not correlated to \emph{AgeGroup}.\\
+Ha: They are correlated.\\
+\(\alpha\) = 0.05\\
+The p-value is much lower than 0.05, so we reject Ho, which suggests
+different groups has different probabilities to get heart disease.
+
+\begin{verbatim}
+## 
+##  Pearson's Chi-squared test
+## 
+## data:  xtabs(~data$HeartDisease + data$AgeCategory)
+## X-squared = 18912, df = 12, p-value < 2.2e-16
+\end{verbatim}
+
+Ho: \emph{HeartDisease} is not correlated to \emph{Sex}.\\
+Ha: They are correlated.\\
+\(\alpha\) = 0.05\\
+The p-value is much lower than 0.05, so we reject Ho, which suggests the
+probabilities to get heart disease for male and female are different.
+
+\begin{verbatim}
+## 
+##  Pearson's Chi-squared test
+## 
+## data:  xtabs(~data$HeartDisease + data$Sex)
+## X-squared = 1671.7, df = 1, p-value < 2.2e-16
+\end{verbatim}
+
+Ho: \emph{HeartDisease} is not correlated to \emph{Race}.\\
+Ha: They are correlated.\\
+\(\alpha\) = 0.05\\
+The p-value is much lower than 0.05, so we reject Ho, which suggests the
+probabilities to get heart disease for white and non-white are
+different.
+
+\begin{verbatim}
+## 
+##  Pearson's Chi-squared test
+## 
+## data:  xtabs(~data$HeartDisease + data$Race)
+## X-squared = 721.24, df = 1, p-value < 2.2e-16
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  Numerical Data
+\end{itemize}
+
+According to Table 2, there is no strong linear correlation among the
+numeric variables.
+
+\begin{table}
+
+\caption{\label{tab:unnamed-chunk-9}Correlation Table}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}[t]{lrrrr}
+\toprule
+  & BMI & PhysicalHealth & MentalHealth & SleepTime\\
+\midrule
+BMI & 1.0000000 & 0.1038125 & 0.0567245 & -0.0486534\\
+PhysicalHealth & 0.1038125 & 1.0000000 & 0.2796575 & -0.0584055\\
+MentalHealth & 0.0567245 & 0.2796575 & 1.0000000 & -0.1170783\\
+SleepTime & -0.0486534 & -0.0584055 & -0.1170783 & 1.0000000\\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+We then further analyze them in different age groups because we would
+love to reduce the number of age groups. \emph{BMI} goes higher as
+people get older and then after 65 it gets lower. \emph{SleepTime}
+reveals an uncommon phenomona that people who are 80 or older sleeps
+more. Figure 4 also indicates that younger generation suffer more from
+mental issues and older generation suffer more on physical problems.
+
+\includegraphics{EDA_Report_files/figure-latex/unnamed-chunk-10-1.pdf}
+\includegraphics{EDA_Report_files/figure-latex/unnamed-chunk-10-2.pdf}
+\includegraphics{EDA_Report_files/figure-latex/unnamed-chunk-10-3.pdf}
+\includegraphics{EDA_Report_files/figure-latex/unnamed-chunk-10-4.pdf}
+
+\begin{itemize}
+\tightlist
+\item
+  Logistic Model
+\end{itemize}
+
+By fitting logistic regression, we can see that almost all the variables
+are significant for predicting \emph{HeartDisease}. Surprisingly,
+\emph{AlchoholDrinking} has negative association with
+\emph{HeartDisease}.
+
+Combine the result from the model and the Figure 4, we might consider to
+regroup the \emph{AgeGroup} into only 4 groups (\textless{} 40, 40-59,
+60-79, \textgreater80). Also, to find the vulnerable groups of getting
+heart disease, we may use decision tree and the PCA.
+
+\begin{verbatim}
+## 
+## Call:
+## glm(formula = as.factor(HeartDisease) ~ ., family = binomial, 
+##     data = data)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.1047  -0.4293  -0.2540  -0.1326   3.5881  
+## 
+## Coefficients:
+##                                   Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)                     -6.4830608  0.1034943 -62.642  < 2e-16 ***
+## BMI                              0.0081347  0.0011373   7.153 8.52e-13 ***
+## SmokingYes                       0.3482008  0.0143796  24.215  < 2e-16 ***
+## AlcoholDrinkingYes              -0.2716103  0.0334590  -8.118 4.75e-16 ***
+## StrokeYes                        1.0304371  0.0225307  45.735  < 2e-16 ***
+## PhysicalHealth                   0.0029129  0.0008598   3.388 0.000704 ***
+## MentalHealth                     0.0040747  0.0008799   4.631 3.64e-06 ***
+## DiffWalkingYes                   0.2074626  0.0180683  11.482  < 2e-16 ***
+## SexMale                          0.7083199  0.0145780  48.588  < 2e-16 ***
+## AgeCategory25-29                 0.1236543  0.1241782   0.996 0.319357    
+## AgeCategory30-34                 0.4917089  0.1110833   4.426 9.58e-06 ***
+## AgeCategory35-39                 0.6084139  0.1063690   5.720 1.07e-08 ***
+## AgeCategory40-44                 1.0164925  0.1000598  10.159  < 2e-16 ***
+## AgeCategory45-49                 1.3409679  0.0964953  13.897  < 2e-16 ***
+## AgeCategory50-54                 1.7561326  0.0931489  18.853  < 2e-16 ***
+## AgeCategory55-59                 1.9948168  0.0916947  21.755  < 2e-16 ***
+## AgeCategory60-64                 2.2575566  0.0908500  24.849  < 2e-16 ***
+## AgeCategory65-69                 2.4930843  0.0905818  27.523  < 2e-16 ***
+## AgeCategory70-74                 2.7692245  0.0905100  30.596  < 2e-16 ***
+## AgeCategory75-79                 2.9576256  0.0910387  32.488  < 2e-16 ***
+## AgeCategory80 or older           3.2136495  0.0907803  35.400  < 2e-16 ***
+## RaceWhite                        0.2009655  0.0185868  10.812  < 2e-16 ***
+## DiabeticNo, borderline diabetes  0.0967987  0.0416679   2.323 0.020174 *  
+## DiabeticYes                      0.4549081  0.0166775  27.277  < 2e-16 ***
+## DiabeticYes (during pregnancy)   0.0927621  0.1047582   0.885 0.375894    
+## PhysicalActivityYes              0.0354841  0.0160041   2.217 0.026610 *  
+## GenHealthFair                    1.4481710  0.0328406  44.097  < 2e-16 ***
+## GenHealthGood                    0.9747177  0.0296685  32.854  < 2e-16 ***
+## GenHealthPoor                    1.8457914  0.0408931  45.137  < 2e-16 ***
+## GenHealthVery good               0.4479533  0.0305362  14.670  < 2e-16 ***
+## SleepTime                       -0.0234114  0.0043126  -5.429 5.68e-08 ***
+## AsthmaYes                        0.2596453  0.0191388  13.566  < 2e-16 ***
+## KidneyDiseaseYes                 0.5572447  0.0243079  22.924  < 2e-16 ***
+## SkinCancerYes                    0.0931997  0.0194867   4.783 1.73e-06 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 183054  on 301716  degrees of freedom
+## Residual deviance: 143259  on 301683  degrees of freedom
+## AIC: 143327
+## 
+## Number of Fisher Scoring iterations: 7
+\end{verbatim}
+
+\hypertarget{what-scientific-questions-you-will-try-to-answer}{%
+\subsection{What scientific questions you will try to
+answer:}\label{what-scientific-questions-you-will-try-to-answer}}
+
+\begin{itemize}
+\item
+  How those living habits and health condition-related variables may
+  affect the possibility of being diagnosed with heart disease in
+  general.
+\item
+  How each variable contributes to the inference of heart disease,
+  identify mostly related variables.
+\item
+  What is the correlation among those variables?
+\item
+  How to identify vulnerable groups getting heart disease.
+\end{itemize}
+
+\hypertarget{the-statistical-analysis-techniques-you-will-use-to-answer-those-questions-with-justification}{%
+\subsection{The statistical analysis techniques you will use to answer
+those questions (with
+justification)}\label{the-statistical-analysis-techniques-you-will-use-to-answer-those-questions-with-justification}}
+
+The scientific questions above are more focused on statistical inference
+rather than performing predictions. To understand the relationship
+between those emphasized variables, we will both perform classification
+and regression on this dataset.
+
+\hypertarget{classification}{%
+\paragraph{Classification:}\label{classification}}
+
+The classification is aimed at answering the vulnerable groups and how
+the variable will contribute to the diagnosis. The statistical method we
+choose is \texttt{Decision\ Tree\ Classification}, reasons are:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Model interpretation:} Though the decision tree may not
+  provide the most accurate prediction, the boundary it gives is
+  interpretable and fits well with our purpose of studying the
+  contribution to heart disease.
+\item
+  \textbf{Built-in variable selection:} The decision tree itself can
+  help us with variable selection, which is important cause we want to
+  know the most related variables
+\item
+  \textbf{Capable of dealing with mixed variable type}: Our data set is
+  a combination of numerical and categorical data, and
+  \texttt{Decision\ Trees} handle those well.
+\item
+  \textbf{A non-parametric aspect}: It will provide a non-parametric way
+  aside from our regression method to be compared.
+\item
+  \textbf{Perform well on imbalanced dataset}: The proportion of the
+  heart disease in our data set is not balanced, but
+  \texttt{Decision\ tree}'s hierarchical structure allows it to learn
+  signals from both classes.
+\end{itemize}
+
+\hypertarget{regression}{%
+\paragraph{Regression:}\label{regression}}
+
+Here will study our data with \texttt{Logistic\ Regression}, which is a
+pretty intuitive way.
+
+\begin{itemize}
+\item
+  \textbf{Intuitive Regression Method}: Logistic regression is a widely
+  accepted method in terms of building linear relationships between
+  binary response and other predictors, with a range of well-developed
+  statistical testing and evaluation techniques.
+\item
+  \textbf{Marginal Interpretation}: The advantage of using a linear
+  combination of the coefficients is interpretable and we could compare
+  their coefficients to understand how each variable is counting for the
+  heart disease diagnosis.
+\item
+  \textbf{Probabilistic interpretation}: Rather than just give a
+  classification result, the response is actually probabilistic, which
+  will enhance our statistical argumentation.
+\item
+  \textbf{Correlation Calibration}: By examining potential correlations
+  and multilinearity among those variables, we could perform multiple
+  trials on regression with different interaction terms.
+\end{itemize}
+
+\end{document}
